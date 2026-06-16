@@ -1,0 +1,27 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+def graficar_distribucion_sexo(df_adultos_cleaned, variable, titulo):
+    #print("### Análisis de 'Sexo' (Gender) ###")
+    sex_distribution = df_adultos_cleaned['Sexo'].value_counts(dropna=False)
+    #print("Distribución por Sexo:\n", sex_distribution)
+
+    plt.figure(figsize=(8, 8))
+    plt.pie(sex_distribution.values, labels=sex_distribution.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette('Paired'))
+    #plt.title('Distribución de Pacientes por Sexo')
+    plt.title(titulo)
+    plt.axis('equal') # Equal aspect ratio ensures that pie is drawn as a circle.
+    plt.show()
+
+def graficar_distribucion_variable(df_adultos_cleaned, variable, titulo):
+    #print("\n### Análisis de 'Edad' (Age) ###")
+    #print("Estadísticas Descriptivas para Edad:\n", df_adultos_cleaned['Edad'].describe())
+
+    plt.figure(figsize=(10, 6))
+    sns.histplot(df_adultos_cleaned['Edad'].dropna(), bins=20, kde=True, color='skyblue')
+    #plt.title('Distribución de Edad de los Pacientes')
+    plt.title(titulo)
+    plt.xlabel('Edad')
+    plt.ylabel('Frecuencia')
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.show()
